@@ -3,6 +3,7 @@ require 'rails/generators/base'
 module Marilyn
   module Generators
     class FishGenerator < Rails::Generators::Base
+      desc "Installs advanced templates for Rails generators and adding some functional files"
       source_root File.dirname(__FILE__)
 
       def copy_templates
@@ -30,13 +31,24 @@ module Marilyn
       end
 
       def invoke_stars_form_generator
-        invoke('stars_form')
+        log :invoke, 'invoke marilyn:stars_form'
+        invoke('marilyn:stars_form')
+      end
+
+      def invoke_welcome_controller_generator
+        log :invoke, 'invoke marilyn:welcome'
+        invoke('marilyn:welcome')
+      end
+
+      def invoke_cancan_ability
+        log :invoke, 'invoke cancan:ability'
+        invoke('cancan:ability')
       end
 
       protected
 
       def force_change?(file_name)
-        yes?("replace #{file_name}?")
+        yes?("replace #{file_name}? [Yn]", :green)
       end
     end
   end
