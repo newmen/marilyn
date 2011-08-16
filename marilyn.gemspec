@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Gleb Averchuk"]
   s.email       = ["altermn@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/newmen/marilyn"
   s.summary     = %q{Provides a good templates.}
   s.description = %q{Provides a good templates for the generators instead of the Rails standard, as well as some minimal required files.}
 
