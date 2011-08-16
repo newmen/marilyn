@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Gleb Averchuk"]
   s.email       = ["altermn@gmail.com"]
   s.homepage    = ""
-  s.summary     = %q{Provides a good templates}
-  s.description = %q{Provides a good templates for the generators instead of the Rails standard, as well as some minimal required files}
+  s.summary     = %q{Provides a good templates.}
+  s.description = %q{Provides a good templates for the generators instead of the Rails standard, as well as some minimal required files.}
 
   s.rubyforge_project = "marilyn"
 
@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
+  s.add_dependency 'cancan'
   s.add_dependency 'railties', '>= 3.0.0'
 
   # specify any dependencies here; for example:
