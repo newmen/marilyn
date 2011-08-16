@@ -8,6 +8,7 @@
 </head>
 <body>
 
+<%= hidden_div_if(alert, :id => 'alert') { alert } %>
 <%= hidden_div_if(notice, :id => 'notice') { notice } %>
 
 <%= yield %>

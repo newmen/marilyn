@@ -1,5 +1,6 @@
 require 'rails/generators/base'
 require 'devise'
+require 'jquery-rails'
 
 module Marilyn
   module Generators
@@ -48,7 +49,8 @@ module Marilyn
       end
 
       def invoke_devise
-        log :invoke, 'devise User'
+        log :invoke, 'devise'
+        invoke('devise:install')
         invoke('devise', ['User'])
         install_gem_into_gemfile('devise')
       end
@@ -68,7 +70,7 @@ module Marilyn
 
       def install_gem_into_gemfile(gem_name)
         marilyn_gem_regexp = /gem..marilyn..*\n/
-        inject_into_file('Gemfile', "\ngem '#{gem_name}'\n", :after => marilyn_gem_regexp)
+        inject_into_file('Gemfile', "gem '#{gem_name}'\n", :after => marilyn_gem_regexp)
       end
     end
   end
