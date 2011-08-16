@@ -1,30 +1,11 @@
 require 'rails/generators/base'
+require 'devise'
 
 module Marilyn
   module Generators
     class FishGenerator < Rails::Generators::Base
       desc "Installs advanced templates for Rails generators and adding some functional files"
       source_root File.dirname(__FILE__)
-
-      def invoke_devise
-        log :invoke, 'devise User'
-        invoke('devise', ['User'])
-      end
-
-      def invoke_cancan_ability
-        log :invoke, 'cancan:ability'
-        invoke('cancan:ability')
-      end
-
-      def invoke_stars_form_generator
-        log :invoke, 'marilyn:stars_form'
-        invoke('marilyn:stars_form')
-      end
-
-      def invoke_welcome_controller_generator
-        log :invoke, 'marilyn:welcome'
-        invoke('marilyn:welcome')
-      end
 
       def copy_templates
         directory('lib/templates')
@@ -50,10 +31,44 @@ module Marilyn
         copy_file('config/locales/ru.yml')
       end
 
+      def invoke_stars_form_generator
+        log :invoke, 'marilyn:stars_form'
+        invoke('marilyn:stars_form')
+      end
+
+      def invoke_welcome_controller_generator
+        log :invoke, 'marilyn:welcome'
+        invoke('marilyn:welcome')
+      end
+
+      def invoke_jquery_rails
+        log :invoke, 'jquery:install'
+        invoke('jquery:install', [], :ui => true)
+        install_gem_into_gemfile('jquery-rails')
+      end
+
+      def invoke_devise
+        log :invoke, 'devise User'
+        invoke('devise', ['User'])
+        install_gem_into_gemfile('devise')
+      end
+
+      def invoke_cancan_ability
+        log :invoke, 'cancan:ability'
+        invoke('cancan:ability')
+        install_gem_into_gemfile('cancan')
+      end
+
       protected
 
       def force_change?(file_name)
-        yes?("replace #{file_name}? [Yn]", :green)
+        result = ask("replace #{file_name}? [Yn]", :green)
+        result == '' || result.downcase == 'y' || result.downcase == 'yes'
+      end
+
+      def install_gem_into_gemfile(gem_name)
+        marilyn_gem_regexp = /gem..marilyn..*\n/
+        inject_into_file('Gemfile', "\ngem '#{gem_name}'\n", :after => marilyn_gem_regexp)
       end
     end
   end
