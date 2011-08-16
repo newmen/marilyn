@@ -2,7 +2,7 @@ require 'rails/generators/base'
 
 module Marilyn
   module Generators
-    class EmailValidatorGenerator < Rails::Generators::Base
+    class WelcomeGenerator < Rails::Generators::Base
       desc "Installs welcome controller into application"
       source_root File.dirname(__FILE__)
 
