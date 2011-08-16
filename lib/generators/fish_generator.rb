@@ -2,7 +2,7 @@ require 'rails/generators/base'
 
 module Marilyn
   module Generators
-    class MarilynGenerator < Rails::Generators::Base
+    class FishGenerator < Rails::Generators::Base
       source_root File.dirname(__FILE__)
 
       def copy_templates
