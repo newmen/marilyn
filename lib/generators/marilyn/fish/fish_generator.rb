@@ -31,17 +31,17 @@ module Marilyn
       end
 
       def invoke_stars_form_generator
-        log :invoke, 'invoke marilyn:stars_form'
+        log :invoke, 'marilyn:stars_form'
         invoke('marilyn:stars_form')
       end
 
       def invoke_welcome_controller_generator
-        log :invoke, 'invoke marilyn:welcome'
+        log :invoke, 'marilyn:welcome'
         invoke('marilyn:welcome')
       end
 
       def invoke_cancan_ability
-        log :invoke, 'invoke cancan:ability'
+        log :invoke, 'cancan:ability'
         invoke('cancan:ability')
       end
 

@@ -18,6 +18,10 @@ module Marilyn
         begin_regex = /^.*::Application.routes.draw do\n$/
         inject_into_file('config/routes.rb', "\n  root :to => 'welcome#index'\n", :after => begin_regex)
       end
+
+      def remove_default_index_html
+        remove_file('public/index.html')
+      end
     end
   end
 end
