@@ -3,7 +3,7 @@
 
 app/helpers/application_helper.rb
 app/views/layouts/application.html.erb
-app/views/layouts/_form_errors.html.erb
+app/views/shared/_error_messages.html.erb
 config/locales/en.yml
 config/locales/ru.yml
 
