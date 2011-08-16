@@ -5,6 +5,7 @@ require "marilyn/version"
 Gem::Specification.new do |s|
   s.name        = "marilyn"
   s.version     = Marilyn::VERSION
+  s.platform    = Gem::Platform::RUBY
   s.authors     = ["Gleb Averchuk"]
   s.email       = ["altermn@gmail.com"]
   s.homepage    = ""
@@ -18,7 +19,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_runtime_dependency "thor"
+  s.add_dependency 'railties', '>= 3.0.0'
 
   # specify any dependencies here; for example:
   # s.add_development_dependency "rspec"

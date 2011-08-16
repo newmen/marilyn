@@ -1,14 +1,14 @@
+require 'rails/generators'
+
 module Marilyn
   module Generators
-    class Templater < Thor
-      include Thor::Actions
+    class Templater < Rails::Generators::Base
 
       def self.source_root
         File.dirname(__FILE__)
       end
 
-      desc 'install', 'install the templates and partial files'
-      def install
+      def copy_templates
         directory('templates', 'lib/templates')
       end
     end
