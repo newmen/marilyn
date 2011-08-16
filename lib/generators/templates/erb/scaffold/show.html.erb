@@ -1,0 +1,12 @@
+<%%= title(t('<%= plural_table_name %>.show.title')) %>
+
+<% for attribute in attributes -%>
+<p>
+  <b><%%= t('activerecord.attributes.<%= singular_table_name %>.<%= attribute.name %>') %>:</b>
+  <%%= @<%= singular_table_name %>.<%= attribute.name %> %>
+</p>
+
+<% end -%>
+
+<%%= link_to t('backend.actions.edit'), edit_<%= singular_table_name %>_path(@<%= singular_table_name %>) %> |
+<%%= link_to t('backend.actions.back'), <%= index_helper %>_path %>

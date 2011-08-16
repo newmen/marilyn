@@ -1,0 +1,6 @@
+<%%= title(t('<%= plural_table_name %>.edit.title')) %>
+
+<%%= render 'form' %>
+
+<%%= link_to t('backend.actions.show'), @<%= singular_table_name %> %> |
+<%%= link_to t('backend.actions.back'), <%= index_helper %>_path %>

@@ -1,0 +1,25 @@
+<%%= title(t('<%= plural_table_name %>.index.title')) %>
+
+<table>
+  <tr>
+<% for attribute in attributes -%>
+    <th><%%= t('activerecord.attributes.<%= singular_table_name %>.<%= attribute.name %>') %></th>
+<% end -%>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+  <tr>
+<% for attribute in attributes -%>
+    <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+<% end -%>
+    <td><%%= link_to(t('backend.actions.show'), <%= singular_table_name %>) if can?(:show, <%= singular_table_name %>) %></td>
+    <td><%%= link_to(t('backend.actions.edit'), edit_<%= singular_table_name %>_path(<%= singular_table_name %>))  if can?(:edit, <%= singular_table_name %>) %></td>
+    <td><%%= link_to(t('backend.actions.destroy'), <%= singular_table_name %>, :confirm => t('backend.actions.are_you_sure'), :method => :delete) if can?(:destroy, <%= singular_table_name %>) %></td>
+  </tr>
+<%% end %>
+</table>
+
+<p><%%= link_to(t('helpers.submit.create', :model => t('activerecord.models.<%= singular_table_name %>')), new_<%= singular_table_name %>_path) if can?(:create, <%= class_name %>) %></p>

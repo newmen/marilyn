@@ -1,0 +1,13 @@
+<%%= form_for(@<%= singular_table_name %>) do |f| %>
+  <%%= render 'layouts/form_errors', :target => @<%= singular_table_name %> %>
+
+<% for attribute in attributes -%>
+  <div class="field">
+    <%%= f.label :<%= attribute.name %> %><br />
+    <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
+  </div>
+<% end -%>
+  <div class="actions">
+    <%%= f.submit %>
+  </div>
+<%% end %>
