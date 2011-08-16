@@ -15,8 +15,9 @@ module Marilyn
       end
 
       def set_root_route
-        begin_regex = /^.*::Application.routes.draw do\n$/
-        inject_into_file('config/routes.rb', "\n  root :to => 'welcome#index'\n", :after => begin_regex)
+        #begin_regex = /^.*::Application.routes.draw do\n$/
+        #inject_into_file('config/routes.rb', "\n  root :to => 'welcome#index'\n", :after => begin_regex)
+        route "root :to => 'welcome#index'"
       end
 
       def remove_default_index_html

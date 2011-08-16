@@ -6,6 +6,26 @@ module Marilyn
       desc "Installs advanced templates for Rails generators and adding some functional files"
       source_root File.dirname(__FILE__)
 
+      def invoke_devise
+        log :invoke, 'devise User'
+        invoke('devise', ['User'])
+      end
+
+      def invoke_cancan_ability
+        log :invoke, 'cancan:ability'
+        invoke('cancan:ability')
+      end
+
+      def invoke_stars_form_generator
+        log :invoke, 'marilyn:stars_form'
+        invoke('marilyn:stars_form')
+      end
+
+      def invoke_welcome_controller_generator
+        log :invoke, 'marilyn:welcome'
+        invoke('marilyn:welcome')
+      end
+
       def copy_templates
         directory('lib/templates')
       end
@@ -28,21 +48,6 @@ module Marilyn
         en_locale_file = 'config/locales/en.yml'
         copy_file(en_locale_file, :force => force_change?(en_locale_file))
         copy_file('config/locales/ru.yml')
-      end
-
-      def invoke_stars_form_generator
-        log :invoke, 'marilyn:stars_form'
-        invoke('marilyn:stars_form')
-      end
-
-      def invoke_welcome_controller_generator
-        log :invoke, 'marilyn:welcome'
-        invoke('marilyn:welcome')
-      end
-
-      def invoke_cancan_ability
-        log :invoke, 'cancan:ability'
-        invoke('cancan:ability')
       end
 
       protected
