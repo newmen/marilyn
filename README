@@ -1,4 +1,5 @@
 Данный гем предоставляет шаблоны для генерации скафолда. А также устанавливает (заменяет) минимально-необходимые для приложения файлы, такие как:
+
 app/helpers/application_helper.rb
 app/views/layouts/application.html.erb
 app/views/layouts/_form_errors.html.erb
