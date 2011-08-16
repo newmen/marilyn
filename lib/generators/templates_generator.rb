@@ -1,6 +1,6 @@
 require 'rails/generators/base'
 
-#module Marilyn
+module Marilyn
 #  module Generators
     class TemplatesGenerator < Rails::Generators::Base
       source_root File.dirname(__FILE__)
@@ -10,4 +10,4 @@ require 'rails/generators/base'
       end
     end
   #end
-#end
+end
