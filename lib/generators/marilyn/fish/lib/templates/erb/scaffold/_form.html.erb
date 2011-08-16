@@ -1,5 +1,5 @@
-<%%= form_for(@<%= singular_table_name %>) do |f| %>
-  <%%= render 'layouts/form_errors', :target => @<%= singular_table_name %> %>
+<%%= form_for(@<%= singular_table_name %>, :builder => StarsFormBuilder) do |f| %>
+  <%%= render 'shared/error_messages', :target => @<%= singular_table_name %> %>
 
 <% for attribute in attributes -%>
   <div class="field">
