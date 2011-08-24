@@ -42,6 +42,10 @@ module Marilyn
         invoke('marilyn:welcome')
       end
 
+      def install_russian_game
+        install_gem_into_gemfile('russian')
+      end
+
       def invoke_jquery_rails
         log :invoke, 'jquery:install'
         invoke('jquery:install', [], :ui => true)
@@ -59,6 +63,11 @@ module Marilyn
         log :invoke, 'cancan:ability'
         invoke('cancan:ability')
         install_gem_into_gemfile('cancan')
+      end
+
+      def say_than_need_bundle
+        say "Fish successfully installed."
+        say "Now you need run bundle install.", :green
       end
 
       protected
