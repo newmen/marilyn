@@ -38,7 +38,7 @@ module Marilyn
       end
 
       def copy_reset_css
-        copy_file('app/assets/reset.css')
+        copy_file('app/assets/stylesheets/reset.css')
       end
 
       def invoke_welcome_controller_generator
@@ -61,6 +61,14 @@ module Marilyn
         invoke('devise:install')
         invoke('devise', ['User'])
         install_gem_into_gemfile('devise')
+
+        action_mailer_str = "\nconfig.action_mailer.default_url_options = { :host => 'localhost:3000' }\n"
+        last_line_regexp = /config\.assets\.debug = true\n/
+        inject_into_file('config/environments/development.rb', action_mailer_str, :after => last_line_regexp)
+
+        action_mailer_str = "\nconfig.action_mailer.default_url_options = { :host => 'black-sheep.ru' }\n"
+        last_line_regexp = /config\.active_support\.deprecation = :notify\n/
+        inject_into_file('config/environments/production.rb', action_mailer_str, :after => last_line_regexp)
       end
 
       def copy_default_user_migration
