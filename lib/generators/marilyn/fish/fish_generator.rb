@@ -56,19 +56,19 @@ module Marilyn
       #  install_gem_into_gemfile('jquery-rails')
       #end
 
-      def invoke_devise
+      def install_devise
         log :invoke, 'devise'
         invoke('devise:install')
         invoke('devise', ['User'])
         install_gem_into_gemfile('devise')
 
-        action_mailer_str = "\nconfig.action_mailer.default_url_options = { :host => 'localhost:3000' }\n"
         last_line_regexp = /config\.assets\.debug = true\n/
-        inject_into_file('config/environments/development.rb', action_mailer_str, :after => last_line_regexp)
+        inject_into_file('config/environments/development.rb', action_mailer_str('localhost:3000'),
+                         :after => last_line_regexp)
 
-        action_mailer_str = "\nconfig.action_mailer.default_url_options = { :host => 'black-sheep.ru' }\n"
         last_line_regexp = /config\.active_support\.deprecation = :notify\n/
-        inject_into_file('config/environments/production.rb', action_mailer_str, :after => last_line_regexp)
+        inject_into_file('config/environments/production.rb', action_mailer_str('black-sheep.ru'),
+                         :after => last_line_regexp)
       end
 
       def copy_default_user_migration
@@ -99,6 +99,10 @@ module Marilyn
       def install_gem_into_gemfile(gem_name)
         marilyn_gem_regexp = /gem..marilyn..*\n/
         inject_into_file('Gemfile', "gem '#{gem_name}'\n", :after => marilyn_gem_regexp)
+      end
+
+      def action_mailer_str(host)
+        "\n  config.action_mailer.default_url_options = { :host => '#{host}' }\n"
       end
     end
   end
