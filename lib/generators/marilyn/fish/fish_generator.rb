@@ -1,6 +1,6 @@
 require 'rails/generators/base'
 require 'devise'
-require 'jquery-rails'
+#require 'jquery-rails'
 
 module Marilyn
   module Generators
@@ -26,7 +26,7 @@ module Marilyn
         copy_file('app/views/shared/_error_messages.html.erb')
       end
 
-      def replace_locales
+      def copy_locales
         en_locale_file = 'config/locales/en.yml'
         copy_file(en_locale_file, :force => force_change?(en_locale_file))
         copy_file('config/locales/ru.yml')
@@ -35,6 +35,10 @@ module Marilyn
       def invoke_stars_form_generator
         log :invoke, 'marilyn:stars_form'
         invoke('marilyn:stars_form')
+      end
+
+      def copy_reset_css
+        copy_file('app/assets/reset.css')
       end
 
       def invoke_welcome_controller_generator
@@ -46,17 +50,24 @@ module Marilyn
         install_gem_into_gemfile('russian')
       end
 
-      def invoke_jquery_rails
-        log :invoke, 'jquery:install'
-        invoke('jquery:install', [], :ui => true)
-        install_gem_into_gemfile('jquery-rails')
-      end
+      #def invoke_jquery_rails
+      #  log :invoke, 'jquery:install'
+      #  invoke('jquery:install', [], :ui => true)
+      #  install_gem_into_gemfile('jquery-rails')
+      #end
 
       def invoke_devise
         log :invoke, 'devise'
         invoke('devise:install')
         invoke('devise', ['User'])
         install_gem_into_gemfile('devise')
+      end
+
+      def copy_default_user_migration
+        migration_path = 'db/migrate/'
+        migration_file = 'add_default_user.rb'
+        copy_file("#{migration_path}#{migration_file}",
+                  "#{migration_path}#{Time.now.strftime('%Y%m%d%H%M%S')}_#{migration_file}")
       end
 
       def invoke_cancan_ability

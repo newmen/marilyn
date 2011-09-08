@@ -21,8 +21,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'cancan'
   s.add_dependency 'devise'
-  s.add_dependency 'jquery-rails'
-  s.add_dependency 'railties', '>= 3.0.0'
+  #s.add_dependency 'jquery-rails'
+  s.add_dependency 'railties', '>= 3.1.0'
 
   # specify any dependencies here; for example:
   # s.add_development_dependency "rspec"
