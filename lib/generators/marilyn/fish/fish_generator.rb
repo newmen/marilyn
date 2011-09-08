@@ -38,6 +38,8 @@ module Marilyn
       end
 
       def copy_reset_css
+        application_css_file = 'app/assets/stylesheets/application.css'
+        copy_file(application_css_file, :force => force_change?(application_css_file))
         copy_file('app/assets/stylesheets/reset.css')
       end
 
