@@ -8,6 +8,12 @@ module Marilyn
       desc "Installs advanced templates for Rails generators and adding some functional files"
       source_root File.dirname(__FILE__)
 
+      def support_ruby192
+        support_str = "\nrequire 'yaml'\nYAML::ENGINE.yamler= 'syck'\n"
+        rubygems_regexp = /require 'rubygems'\n/
+        inject_into_file('config/boot.rb', support_str, :after => rubygems_regexp)
+      end
+
       def copy_templates
         directory('lib/templates')
       end
