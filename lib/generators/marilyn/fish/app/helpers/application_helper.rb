@@ -4,6 +4,7 @@ module ApplicationHelper
     content_tag('h1', title_text)
   end
 
+  # нигде не используется
   def hidden_div_if(condition, attributes = {}, &block)
     attributes[:style] = 'display: none' if condition
     content_tag('div', attributes, &block)

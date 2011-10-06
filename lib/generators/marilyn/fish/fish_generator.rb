@@ -1,17 +1,16 @@
 require 'rails/generators/base'
-require 'devise'
-#require 'jquery-rails'
 
 module Marilyn
   module Generators
     class FishGenerator < Rails::Generators::Base
+      include FileUtils
+
       desc "Installs advanced templates for Rails generators and adding some functional files"
       source_root File.dirname(__FILE__)
 
       def support_ruby192
-        support_str = "\nrequire 'yaml'\nYAML::ENGINE.yamler= 'syck'\n"
-        rubygems_regexp = /require 'rubygems'\n/
-        inject_into_file('config/boot.rb', support_str, :after => rubygems_regexp)
+        support_str = "\n# Supporting Ruby 1.9.2\nrequire 'yaml'\nYAML::ENGINE.yamler = 'syck'\n"
+        inject_into_file('config/boot.rb', support_str, :after => /require 'rubygems'\n/)
       end
 
       def copy_templates
@@ -19,13 +18,11 @@ module Marilyn
       end
 
       def replace_application_helper
-        application_helper_file = 'app/helpers/application_helper.rb'
-        copy_file(application_helper_file, :force => force_change?(application_helper_file))
+        copy_file('app/helpers/application_helper.rb')
       end
 
       def replace_layout
-        application_layout_file = 'app/views/layouts/application.html.erb'
-        copy_file(application_layout_file, :force => force_change?(application_layout_file))
+        copy_file('app/views/layouts/application.html.erb')
       end
 
       def copy_error_messages_partial
@@ -33,8 +30,7 @@ module Marilyn
       end
 
       def copy_locales
-        en_locale_file = 'config/locales/en.yml'
-        copy_file(en_locale_file, :force => force_change?(en_locale_file))
+        copy_file('config/locales/en.yml')
         copy_file('config/locales/ru.yml')
       end
 
@@ -44,8 +40,7 @@ module Marilyn
       end
 
       def copy_reset_css
-        application_css_file = 'app/assets/stylesheets/application.css'
-        copy_file(application_css_file, :force => force_change?(application_css_file))
+        copy_file('app/assets/stylesheets/application.css')
         copy_file('app/assets/stylesheets/reset.css')
       end
 
@@ -58,60 +53,16 @@ module Marilyn
         install_gem_into_gemfile('russian')
       end
 
-      #def invoke_jquery_rails
-      #  log :invoke, 'jquery:install'
-      #  invoke('jquery:install', [], :ui => true)
-      #  install_gem_into_gemfile('jquery-rails')
-      #end
-
-      def install_devise
-        log :invoke, 'devise'
-        invoke('devise:install')
-        invoke('devise', ['User'])
-        install_gem_into_gemfile('devise')
-
-        last_line_regexp = /config\.assets\.debug = true\n/
-        inject_into_file('config/environments/development.rb', action_mailer_str('localhost:3000'),
-                         :after => last_line_regexp)
-
-        last_line_regexp = /config\.active_support\.deprecation = :notify\n/
-        inject_into_file('config/environments/production.rb', action_mailer_str('black-sheep.ru'),
-                         :after => last_line_regexp)
-      end
-
-      def copy_default_user_migration
-        migration_path = 'db/migrate/'
-        migration_file = 'add_default_user.rb'
-        copy_file("#{migration_path}#{migration_file}",
-                  "#{migration_path}#{Time.now.strftime('%Y%m%d%H%M%S')}_#{migration_file}")
-      end
-
-      def invoke_cancan_ability
-        log :invoke, 'cancan:ability'
-        invoke('cancan:ability')
-        install_gem_into_gemfile('cancan')
+      def invoke_devise_install
+        log :invoke, 'marilyn:devise'
+        invoke('marilyn:devise')
       end
 
       def say_than_need_bundle
         say "Fish successfully installed."
-        say "Now you need run bundle install.", :green
+        say "Now you need to run bundle install.", :red
       end
 
-      protected
-
-      def force_change?(file_name)
-        result = ask("replace #{file_name}? [Yn]", :green)
-        result == '' || result.downcase == 'y' || result.downcase == 'yes'
-      end
-
-      def install_gem_into_gemfile(gem_name)
-        marilyn_gem_regexp = /gem..marilyn..*\n/
-        inject_into_file('Gemfile', "gem '#{gem_name}'\n", :after => marilyn_gem_regexp)
-      end
-
-      def action_mailer_str(host)
-        "\n  config.action_mailer.default_url_options = { :host => '#{host}' }\n"
-      end
     end
   end
 end

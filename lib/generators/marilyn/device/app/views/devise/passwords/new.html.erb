@@ -1,0 +1,14 @@
+<%= title(t('forgot_password')) %>
+
+<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+    <%= render 'shared/error_messages', :target => resource %>
+
+    <p><%= f.label :email %><br/>
+      <%= f.email_field :email %></p>
+
+    <p><%= f.submit t('send_me_reset_password') %></p>
+<% end %>
+
+<div class="nav-actions">
+  <%= render :partial => "devise/shared/links" %>
+</div>

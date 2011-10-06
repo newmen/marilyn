@@ -5,9 +5,7 @@
 <% for attribute in attributes -%>
     <th><%%= t('activerecord.attributes.<%= singular_table_name %>.<%= attribute.name %>') %></th>
 <% end -%>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th colspan="3"> </th>
   </tr>
 
 <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
@@ -22,4 +20,6 @@
 <%% end %>
 </table>
 
-<p><%%= link_to(t('helpers.submit.create', :model => t('activerecord.models.<%= singular_table_name %>')), new_<%= singular_table_name %>_path) if can?(:create, <%= class_name %>) %></p>
+<div class="nav-actions">
+  <%%= link_to(t('helpers.submit.create', :model => t('activerecord.models.<%= singular_table_name %>')), new_<%= singular_table_name %>_path) if can?(:create, <%= class_name %>) %>
+</div>

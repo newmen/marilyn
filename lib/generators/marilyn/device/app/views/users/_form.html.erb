@@ -1,0 +1,41 @@
+<%= form_for(@user, :builder => StarsFormBuilder) do |f| %>
+    <%= render 'shared/error_messages', :target => @user %>
+
+    <div class="field">
+      <%= f.label :last_name %><br/>
+      <%= f.text_field :last_name %>
+    </div>
+    <div class="field">
+      <%= f.label :first_name %><br/>
+      <%= f.text_field :first_name %>
+    </div>
+    <div class="field">
+      <%= f.label :patronymic %><br/>
+      <%= f.text_field :patronymic %>
+    </div>
+    <div class="field">
+      <%= f.label :about %><br/>
+      <%= f.text_area :about %>
+    </div>
+    <div class="field">
+      <%= f.label :sex %>
+      <%= f.collection_select(:sex, Sex.collection, :cut, :name, :prompt => t('backend.actions.please_select')) %>
+    </div>
+    <div class="field">
+      <%= f.label :phone %><br/>
+      <%= f.text_field :phone %>
+    </div>
+    <div class="field">
+      <%= f.label :locale %>
+      <%= f.collection_select(:locale, Locale.collection, :cut, :name) %>
+    </div>
+    <% if can?(:choose_disciplines, @user) %>
+        <div class="field">
+          <%= t('activerecord.attributes.common.disciplines') %><br/>
+          <%= checkbox_list(@user, Discipline.sort_by_name) %>
+        </div>
+    <% end %>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

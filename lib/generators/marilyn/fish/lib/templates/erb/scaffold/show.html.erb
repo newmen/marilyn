@@ -8,5 +8,7 @@
 
 <% end -%>
 
-<%%= link_to t('backend.actions.edit'), edit_<%= singular_table_name %>_path(@<%= singular_table_name %>) %> |
-<%%= link_to t('backend.actions.back'), <%= index_helper %>_path %>
+<div class="nav-actions">
+  <%%= link_to(t('backend.actions.edit'), edit_<%= singular_table_name %>_path(@<%= singular_table_name %>)) if can?(:edit, @<%= singular_table_name %>) %> |
+  <%%= link_to(t('backend.actions.back'), <%= index_helper %>_path) if can?(:index, <%= class_name %>) %>
+</div>

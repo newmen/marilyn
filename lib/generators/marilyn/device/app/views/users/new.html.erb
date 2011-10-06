@@ -1,0 +1,7 @@
+<%= title(t('backend.titles.creating', :model => t('activerecord.models_rp.user'))) %>
+
+<%= render 'form' %>
+
+<div class="nav-actions">
+  <%= link_to(t('backend.actions.back'), users_path) if can?(:index, User) %>
+</div>

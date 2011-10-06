@@ -1,0 +1,44 @@
+<% if current_user == target || target.authentications.count > 0 %>
+    <h2><%= t('users.social_accounts.title') %></h2>
+
+    <% if target.authentications.count > 0 %>
+        <% if can?(:edit_social_accounts, target) %>
+            <div class="field">
+              <div class="authentications">
+                <h4><%= t('users.social_accounts.enabled') %>:</h4>
+
+                <% target.authentications.each do |auth| %>
+                    <div class="authentication">
+                      <% img = image_tag("#{auth.provider}.png", :alt => "#{auth.provider.capitalize} :: #{auth.uid}") %>
+                      <%= auth.url? ? link_to(img, auth.url, :target => '_blank') : img %>
+                      <div class="provider"><%= auth.provider %></div>
+                      <div class="uid"><%= auth.uid %></div>
+                      <%= link_to "X", social_account_deactivate_path(auth), :class => "remove", :title => t('users.social_accounts.disable') %>
+                    </div>
+                <% end %>
+              </div>
+              <div class="clear"></div>
+            </div>
+        <% else %>
+            <div class="field oauth-sign-links">
+              <% target.authentications.each do |auth| %>
+                  <% next unless auth.url? %>
+                  <% img = image_tag("#{auth.provider}.png", :alt => "#{auth.provider.capitalize} :: #{auth.uid}") %>
+                  <%= link_to(img, auth.url, :target => '_blank') %>
+              <% end %>
+            </div>
+        <% end %>
+    <% end %>
+
+    <% if can?(:edit_social_accounts, target) && target.authentications.count < User.omniauth_providers.size %>
+        <div class="field oauth-sign-links">
+          <h4><%= t('users.social_accounts.disabled') %>:</h4>
+          <% connected_providers = target.authentications.map(&:provider) %>
+          <% User.omniauth_providers.each do |provider| %>
+              <% next if connected_providers.include?(provider.to_s) %>
+              <% img = image_tag("#{provider}.png", :alt => t('sign_in_with', :provider => provider.to_s.titleize)) %>
+              <%= link_to img, omniauth_authorize_path(:user, provider) %>
+          <% end %>
+        </div>
+    <% end %>
+<% end %>

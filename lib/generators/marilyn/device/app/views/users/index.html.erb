@@ -1,0 +1,19 @@
+<%= title(t('backend.titles.listing', :model => t('activerecord.pluralize_models_rp.user'))) %>
+
+<table>
+  <tr>
+    <th><%= t('activerecord.attributes.user.full_name') %></th>
+    <th><%= t('activerecord.attributes.user.email') %></th>
+    <th><%= t('activerecord.attributes.user.phone') %></th>
+    <th> </th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= one_user(user) %></td>
+    <td><%= link_to(user.email, "mailto:#{user.email}") %></td>
+    <td><%= user.phone %></td>
+    <td><%= link_to(t('backend.actions.edit'), edit_user_path(user)) if can?(:update, user) %></td>
+  </tr>
+<% end %>
+</table>

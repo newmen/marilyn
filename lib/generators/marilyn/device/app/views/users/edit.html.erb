@@ -1,0 +1,9 @@
+<%= title(t('backend.titles.editing', :model => t('activerecord.models_rp.user'))) %>
+
+<%= render 'form' %>
+
+<div class="nav-actions">
+  <%= link_to(t('backend.actions.show'), @user) if can?(:show, @user) %>
+  <%= link_to(t('users.edit.change_password'), password_user_path(@user)) if can?(:change_password, @user) %>
+  <%= link_to(t('backend.actions.back'), users_path) if can?(:index, User) %>
+</div>

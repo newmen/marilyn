@@ -1,0 +1,94 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require reset
+ *= require_self
+ *= require_tree .
+*/
+
+@mixin top-message($color, $background-color, $border-color) {
+    font-size: 12px;
+    padding: 5px 8px;
+    color: $color;
+    background-color: $background-color;
+    border-color: $border-color;
+    border-width: 2px;
+    border-style: solid;
+}
+
+$main-color: #122;
+
+body {
+    /*background-color: #add8e6;*/
+    /*background-color: #8fcb8f;*/
+    background-color: #778899;
+    color: $main-color;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    min-width: 800px;
+
+    h1, h2 {
+        font-weight: bold;
+    }
+
+    $page_width: 957px;
+
+    #page {
+        background: white;
+        width: $page_width;
+        margin: 50px auto;
+        padding: 25px 38px;
+        border-color: $main-color;
+        border-width: 1px;
+        border-style: solid;
+        overflow: hidden;
+        /*text-align: left;*/
+
+        p, div.field, div.actions {
+            padding-top: 8px;
+            padding-down: 5px;
+        }
+
+        h1 {
+            font-size: 28px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 20px;
+            padding-top: 8px;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            font-size: 14px;
+        }
+
+        a {
+            color: #344556;
+            &:hover {
+                color: #445566;
+            }
+        }
+
+        table th {
+            text-align: center;
+            padding: 5px;
+        }
+
+        table td {
+            padding: 3px 5px;
+        }
+
+        .alert {
+            @include top-message(#c00, #fef3e9, red);
+        }
+
+        .notice {
+            @include top-message(green, #e5fef2, #c9f8d4);
+        }
+    }
+}
+

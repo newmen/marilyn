@@ -1,0 +1,48 @@
+<%= title(@user.full_name) %>
+
+<p>
+  <b><%= t('activerecord.attributes.user.email') %>:</b>
+  <%= link_to @user.email, "mailto:#{@user.email}" %>
+</p>
+
+<% if @user.phone? %>
+    <p>
+      <b><%= t('activerecord.attributes.user.about') %>:</b>
+      <%= @user.about %>
+    </p>
+<% end %>
+
+<% if @user.sex? %>
+    <p>
+      <b><%= t('activerecord.attributes.user.sex') %>:</b>
+      <%= @user.sex %>
+    </p>
+<% end %>
+
+<% if @user.phone? %>
+    <p>
+      <b><%= t('activerecord.attributes.user.phone') %>:</b>
+      <%= @user.phone %>
+    </p>
+<% end %>
+
+<% unless @user.teachers.empty? %>
+    <p>
+      <b><%= t('activerecord.attributes.common.disciplines') %>:</b>
+      <%= stuffs_list(@user.teaches_disciplines) %>
+    </p>
+<% end %>
+
+<% unless @user.students.empty? %>
+    <p>
+      <b><%= t('activerecord.attributes.user.groups') %>:</b>
+      <%= stuffs_list(@user.groups) %>
+    </p>
+<% end %>
+
+<%= render 'social_accounts', :target => @user %>
+
+<div class="nav-actions">
+  <%= link_to(t('backend.actions.edit'), edit_user_path(@user)) if can?(:update, @user) %>
+  <%= link_to(t('backend.actions.back'), users_path) if can?(:index, User) %>
+</div>

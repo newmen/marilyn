@@ -2,4 +2,6 @@
 
 <%%= render 'form' %>
 
-<%%= link_to t('backend.actions.back'), <%= index_helper %>_path %>
+<div class="nav-actions">
+  <%%= link_to(t('backend.actions.back'), <%= index_helper %>_path) if can?(:index, <%= class_name %>) %>
+</div>
