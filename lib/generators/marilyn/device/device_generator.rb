@@ -32,8 +32,8 @@ module Marilyn
       end
 
       def copy_locales
-        copy_file('config/locales/devise.en.yml')
-        copy_file('config/locales/devise.ru.yml')
+        fish_copy('config/locales/devise.en.yml')
+        fish_copy('config/locales/devise.ru.yml')
       end
 
       def invoke_cancan_ability

@@ -18,20 +18,20 @@ module Marilyn
       end
 
       def replace_application_helper
-        copy_file('app/helpers/application_helper.rb')
+        fish_copy('app/helpers/application_helper.rb')
       end
 
       def replace_layout
-        copy_file('app/views/layouts/application.html.erb')
+        fish_copy('app/views/layouts/application.html.erb')
       end
 
       def copy_error_messages_partial
-        copy_file('app/views/shared/_error_messages.html.erb')
+        fish_copy('app/views/shared/_error_messages.html.erb')
       end
 
       def copy_locales
-        copy_file('config/locales/en.yml')
-        copy_file('config/locales/ru.yml')
+        fish_copy('config/locales/en.yml')
+        fish_copy('config/locales/ru.yml')
       end
 
       def invoke_stars_form_generator
@@ -40,8 +40,8 @@ module Marilyn
       end
 
       def copy_reset_css
-        copy_file('app/assets/stylesheets/application.css')
-        copy_file('app/assets/stylesheets/reset.css')
+        fish_copy('app/assets/stylesheets/application.css')
+        fish_copy('app/assets/stylesheets/reset.css')
       end
 
       def invoke_welcome_controller_generator

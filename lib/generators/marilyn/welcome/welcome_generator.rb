@@ -7,11 +7,11 @@ module Marilyn
       source_root File.dirname(__FILE__)
 
       def copy_controller_files
-        copy_file('app/controllers/welcome_controller.rb')
-        copy_file('test/functional/welcome_controller_test.rb')
-        copy_file('app/helpers/welcome_helper.rb')
-        copy_file('test/unit/helpers/welcome_helper_test.rb')
-        copy_file('app/views/welcome/index.html.erb')
+        fish_copy('app/controllers/welcome_controller.rb')
+        fish_copy('test/functional/welcome_controller_test.rb')
+        fish_copy('app/helpers/welcome_helper.rb')
+        fish_copy('test/unit/helpers/welcome_helper_test.rb')
+        fish_copy('app/views/welcome/index.html.erb')
       end
 
       def set_root_route

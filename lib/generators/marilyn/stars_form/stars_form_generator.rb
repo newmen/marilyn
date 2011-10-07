@@ -7,7 +7,7 @@ module Marilyn
       source_root File.dirname(__FILE__)
 
       def copy_form_builder_file
-        copy_file('lib/stars_form_builder.rb')
+        fish_copy('lib/stars_form_builder.rb')
       end
 
       def extend_environment

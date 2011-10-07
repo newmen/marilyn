@@ -7,7 +7,7 @@ module Marilyn
       source_root File.dirname(__FILE__)
 
       def copy_validator_file
-        copy_file('lib/email_format_validator.rb')
+        fish_copy('lib/email_format_validator.rb')
       end
 
       def extend_environment
