@@ -7,7 +7,7 @@ module Marilyn
       inject_into_file('Gemfile', "gem '#{gem_name}'\n", :after => /gem..marilyn..*\n/)
     end
 
-    def fish_copy locate
+    def fish_copy(locate)
       copy_file(locate, locate)
     end
 

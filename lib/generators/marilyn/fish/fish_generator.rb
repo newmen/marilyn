@@ -14,7 +14,7 @@ module Marilyn
       end
 
       def copy_templates
-        directory('lib/templates', 'lib/templates')
+        directory('lib/templates')
       end
 
       def replace_application_helper
